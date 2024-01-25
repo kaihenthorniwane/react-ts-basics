@@ -8,10 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        BrandWhite: "rgb(var(--Brand-White) / <alpha-value>)",
+        BrandBlack: "rgb(var(--Brand-Black)/ <alpha-value>)",
+      },
+      fontFamily: {
+        header: "brother-1816, sans-serif;",
+        body: "tenon, sans-serif",
       },
     },
   },
