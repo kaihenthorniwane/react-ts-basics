@@ -10,7 +10,6 @@ export default function Checkbox({ selected }: { selected: boolean }) {
   const checkedInput = useStateMachineInput(rive, "Checkbox", "Checked");
 
   useEffect(() => {
-    console.log(checkedInput);
     if (checkedInput !== null) {
       checkedInput.value = selected;
     }
