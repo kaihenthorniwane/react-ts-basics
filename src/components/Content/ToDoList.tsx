@@ -1,4 +1,4 @@
-import { ToDoEntryProps } from "@/app/page";
+import { ToDoEntry as ToDoEntryProps } from "@/app/page";
 import ToDoEntry from "./ToDoEntry";
 
 export default function ToDoList({

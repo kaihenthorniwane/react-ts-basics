@@ -5,18 +5,18 @@ import Header from "@/components/Content/Header";
 import ToDoList from "@/components/Content/ToDoList";
 import { useRef, useState } from "react";
 
-export interface ToDoEntryProps {
+export interface ToDoEntry {
   key: number;
   content: string;
 }
 
 export default function Home() {
-  const [toDoEntries, setToDoEntries] = useState<Array<ToDoEntryProps>>([]);
-  const [doneEntries, setDoneEntries] = useState<Array<ToDoEntryProps>>([]);
+  const [toDoEntries, setToDoEntries] = useState<Array<ToDoEntry>>([]);
+  const [doneEntries, setDoneEntries] = useState<Array<ToDoEntry>>([]);
   const keyIncrement = useRef(1);
 
   function handleAddToDo() {
-    const newEntry: ToDoEntryProps = {
+    const newEntry: ToDoEntry = {
       key: keyIncrement.current,
       content: "One line content",
     };

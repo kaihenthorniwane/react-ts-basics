@@ -12,8 +12,13 @@ export default function ToDoEntry({ content }: ToDoEntryProps) {
   useEffect(() => {
     const checkIfSingleLine = () => {
       if (contentRef.current) {
-        // Assuming a line-height of 20px. Adjust this based on your CSS.
-        const lineHeight = 35;
+        // Fetching the root font-size
+        const root = document.documentElement;
+        const rootFontSize = parseFloat(getComputedStyle(root).fontSize);
+
+        // Calculating the line height based on the root font size
+        // Assuming a line-height of 1.5 times the root font size
+        const lineHeight = 2 * rootFontSize;
         const isContentSingleLine =
           contentRef.current.clientHeight <= lineHeight;
         setIsSingleLine(isContentSingleLine);
@@ -33,8 +38,8 @@ export default function ToDoEntry({ content }: ToDoEntryProps) {
   return (
     <div className="flex gap-4 ">
       <Checkbox />
-      <div ref={contentRef} className={isSingleLine ? "mt-[0.2rem]" : ""}>
-        {content}
+      <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
+        <div ref={contentRef}>{content}</div>
       </div>
     </div>
   );
