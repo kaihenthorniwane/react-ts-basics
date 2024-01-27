@@ -2,10 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "./Icons/Checkbox";
 
 type ToDoEntryProps = {
+  id: number;
   content: string;
+  handleMarkAsDone: (key: number) => void;
 };
 
-export default function ToDoEntry({ content }: ToDoEntryProps) {
+export default function ToDoEntry({
+  id,
+  content,
+  handleMarkAsDone,
+}: ToDoEntryProps) {
   const [isSingleLine, setIsSingleLine] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +43,13 @@ export default function ToDoEntry({ content }: ToDoEntryProps) {
 
   return (
     <div className="flex gap-4 ">
-      <Checkbox />
+      <div
+        onClick={() => {
+          handleMarkAsDone(id);
+        }}
+      >
+        <Checkbox />
+      </div>
       <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
         <div ref={contentRef}>{content}</div>
       </div>

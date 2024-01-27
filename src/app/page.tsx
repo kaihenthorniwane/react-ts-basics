@@ -26,16 +26,36 @@ export default function Home() {
     });
   }
 
+  function handleMarkAsDone(key: number) {
+    const searchResult: ToDoEntry | undefined = toDoEntries.find((entry) => {
+      return entry.key === key;
+    });
+    if (typeof searchResult !== "undefined") {
+      const curEntry: ToDoEntry = searchResult;
+      setToDoEntries((prevEntries) =>
+        prevEntries.filter((entry) => entry.key !== key)
+      );
+      setDoneEntries((prevEntries) => [...prevEntries, curEntry]);
+    }
+  }
+
   return (
     <main className="flex flex-col items-center p-5 pt-10 ">
       <FloatingActionButton handleAddToDo={handleAddToDo} />
       <div className="flex flex-col w-full max-w-screen-sm items-stretch gap-14">
         <div className="flex flex-col gap-6">
           <Header amount={toDoEntries.length} topText={"You've got"} />
-          <ToDoList toDoItems={toDoEntries} />
+          <ToDoList
+            toDoItems={toDoEntries}
+            handleMarkAsDone={handleMarkAsDone}
+          />
         </div>
         <div className="flex flex-col gap-5">
           <Header amount={doneEntries.length} topText={"You finished"} />
+          <ToDoList
+            toDoItems={doneEntries}
+            handleMarkAsDone={handleMarkAsDone}
+          />
         </div>
       </div>
     </main>
