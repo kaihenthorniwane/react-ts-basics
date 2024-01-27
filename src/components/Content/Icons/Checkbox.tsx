@@ -1,19 +1,26 @@
-export default function Checkbox() {
+import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
+import { useEffect } from "react";
+
+export default function Checkbox({ selected }: { selected: boolean }) {
+  const { rive, RiveComponent } = useRive({
+    src: "/riv/checkbox.riv",
+    stateMachines: "Checkbox",
+    autoplay: true,
+  });
+  const checkedInput = useStateMachineInput(rive, "Checkbox", "Checked");
+
+  useEffect(() => {
+    console.log(checkedInput);
+    if (checkedInput !== null) {
+      checkedInput.value = selected;
+    }
+  }, [selected, checkedInput]);
+
   return (
-    <svg
-      width="34"
-      height="34"
-      viewBox="0 0 34 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="min-w-8 max-w-8"
-    >
-      <path
-        d="M1 15.4C1 10.3595 1 7.83929 1.98094 5.91409C2.8438 4.22063 4.22063 2.8438 5.91409 1.98094C7.83929 1 10.3595 1 15.4 1H18.6C23.6405 1 26.1607 1 28.0859 1.98094C29.7794 2.8438 31.1562 4.22063 32.0191 5.91409C33 7.83929 33 10.3595 33 15.4V18.6C33 23.6405 33 26.1607 32.0191 28.0859C31.1562 29.7794 29.7794 31.1562 28.0859 32.0191C26.1607 33 23.6405 33 18.6 33H15.4C10.3595 33 7.83929 33 5.91409 32.0191C4.22063 31.1562 2.8438 29.7794 1.98094 28.0859C1 26.1607 1 23.6405 1 18.6V15.4Z"
-        fill="rgb(var(--Brand-Black))"
-        stroke="rgb(var(--Brand-White))"
-        strokeWidth="1.5"
-      />
-    </svg>
+    <div className="flex flex-col justify-center items-center min-w-8 max-w-8 min-h-8 max-h-8">
+      <div className="w-[3.25rem] h-[3.25rem] min-w-[3.25rem] min-h-[3.25rem]">
+        <RiveComponent />
+      </div>
+    </div>
   );
 }

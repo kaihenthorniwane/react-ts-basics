@@ -6,6 +6,7 @@ type ToDoEntryProps = {
   id: number;
   content: string;
   initialInstance: boolean;
+  selected: boolean;
   handleMarkAsDone: (key: number) => void;
 };
 
@@ -13,6 +14,7 @@ export default function ToDoEntry({
   id,
   content,
   initialInstance,
+  selected,
   handleMarkAsDone,
 }: ToDoEntryProps) {
   const [isSingleLine, setIsSingleLine] = useState(true);
@@ -59,7 +61,7 @@ export default function ToDoEntry({
             handleMarkAsDone(id);
           }}
         >
-          <Checkbox />
+          <Checkbox selected={selected} />
         </div>
         <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
           <div ref={contentRef}>{content}</div>
