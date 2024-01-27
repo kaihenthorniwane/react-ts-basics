@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export interface ToDoEntry {
   key: number;
   content: string;
+  initialInstance: boolean;
 }
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
     const newEntry: ToDoEntry = {
       key: keyIncrement.current,
       content: "One line content",
+      initialInstance: true,
     };
     keyIncrement.current++;
     setToDoEntries((prevEntries) => {
@@ -32,7 +34,11 @@ export default function Home() {
       return entry.key === key;
     });
     if (typeof searchResult !== "undefined") {
-      const curEntry: ToDoEntry = searchResult;
+      const instanceSetting = searchResult.initialInstance ? false : true;
+      const curEntry: ToDoEntry = {
+        ...searchResult,
+        initialInstance: instanceSetting,
+      };
       setToDoEntries((prevEntries) =>
         prevEntries.filter((entry) => entry.key !== key)
       );
@@ -45,7 +51,11 @@ export default function Home() {
       <FloatingActionButton handleAddToDo={handleAddToDo} />
       <div className="flex flex-col w-full max-w-screen-sm items-stretch gap-14">
         <motion.div className="flex flex-col gap-6" layout>
-          <Header amount={toDoEntries.length} topText={"You've got"} />
+          <Header
+            amount={toDoEntries.length}
+            topText={"You've got"}
+            disableIntro={true}
+          />
           <ToDoList
             toDoItems={toDoEntries}
             handleMarkAsDone={handleMarkAsDone}
@@ -56,10 +66,13 @@ export default function Home() {
             <motion.div
               className="flex flex-col gap-5"
               layout
-              initial={{ x: -100 }}
-              animate={{ x: 0 }}
+              transition={{ ease: [0.08, 0.87, 0.24, 1] }}
             >
-              <Header amount={doneEntries.length} topText={"You finished"} />
+              <Header
+                amount={doneEntries.length}
+                topText={"You finished"}
+                disableIntro={false}
+              />
               <ToDoList
                 toDoItems={doneEntries}
                 handleMarkAsDone={handleMarkAsDone}

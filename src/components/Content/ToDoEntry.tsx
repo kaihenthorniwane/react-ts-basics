@@ -5,12 +5,14 @@ import { AnimatePresence, motion } from "framer-motion";
 type ToDoEntryProps = {
   id: number;
   content: string;
+  initialInstance: boolean;
   handleMarkAsDone: (key: number) => void;
 };
 
 export default function ToDoEntry({
   id,
   content,
+  initialInstance,
   handleMarkAsDone,
 }: ToDoEntryProps) {
   const [isSingleLine, setIsSingleLine] = useState(true);
@@ -47,9 +49,10 @@ export default function ToDoEntry({
       <motion.div
         className="flex gap-4 "
         layout
-        initial={{ x: -100 }}
-        animate={{ x: 0 }}
         layoutId={id.toString()}
+        initial={initialInstance ? { x: -100 } : { x: 0 }}
+        animate={{ x: 0 }}
+        transition={{ ease: [0.08, 0.87, 0.24, 1] }}
       >
         <div
           onClick={() => {
