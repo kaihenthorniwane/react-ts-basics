@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function Header({
   topText,
   amount,
@@ -6,9 +8,12 @@ export default function Header({
   amount: number;
 }) {
   return (
-    <div className="flex flex-col font-header font-extralight gap-2">
+    <motion.div
+      className="flex flex-col font-header font-extralight gap-2"
+      layout
+    >
       <span className="text-3xl">{topText}</span>
       <span className="text-6xl">{amount} to-dos.</span>
-    </div>
+    </motion.div>
   );
 }

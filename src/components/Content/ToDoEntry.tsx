@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "./Icons/Checkbox";
+import { AnimatePresence, motion } from "framer-motion";
 
 type ToDoEntryProps = {
   id: number;
@@ -42,17 +43,25 @@ export default function ToDoEntry({
   }, [content]); // Rerun the effect when 'content' changes
 
   return (
-    <div className="flex gap-4 ">
-      <div
-        onClick={() => {
-          handleMarkAsDone(id);
-        }}
+    <AnimatePresence>
+      <motion.div
+        className="flex gap-4 "
+        layout
+        initial={{ x: -100 }}
+        animate={{ x: 0 }}
+        layoutId={id.toString()}
       >
-        <Checkbox />
-      </div>
-      <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
-        <div ref={contentRef}>{content}</div>
-      </div>
-    </div>
+        <div
+          onClick={() => {
+            handleMarkAsDone(id);
+          }}
+        >
+          <Checkbox />
+        </div>
+        <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
+          <div ref={contentRef}>{content}</div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }

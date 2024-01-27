@@ -1,5 +1,6 @@
 import { ToDoEntry as ToDoEntryProps } from "@/app/page";
 import ToDoEntry from "./ToDoEntry";
+import { motion } from "framer-motion";
 
 export default function ToDoList({
   toDoItems,
@@ -9,7 +10,7 @@ export default function ToDoList({
   handleMarkAsDone: (key: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-5">
+    <motion.div className="flex flex-col gap-5" layout>
       {toDoItems.map((toDoItem) => {
         return (
           <ToDoEntry
@@ -20,6 +21,6 @@ export default function ToDoList({
           />
         );
       })}
-    </div>
+    </motion.div>
   );
 }
