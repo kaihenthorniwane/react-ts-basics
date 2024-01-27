@@ -10,10 +10,11 @@ export default function Checkbox({ selected }: { selected: boolean }) {
   const checkedInput = useStateMachineInput(rive, "Checkbox", "Checked");
 
   useEffect(() => {
+    console.log(checkedInput);
     if (checkedInput !== null) {
       checkedInput.value = selected;
     }
-  }, [checkedInput]);
+  }, [selected, checkedInput]);
 
   return (
     <div className="flex flex-col justify-center items-center min-w-8 max-w-8 min-h-8 max-h-8">
