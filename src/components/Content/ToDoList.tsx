@@ -1,14 +1,15 @@
-import { ToDoEntry } from "@/app/page";
+import { ToDoEntryProps } from "@/app/page";
+import ToDoEntry from "./ToDoEntry";
 
 export default function ToDoList({
   toDoItems,
 }: {
-  toDoItems: Array<ToDoEntry>;
+  toDoItems: Array<ToDoEntryProps>;
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-5">
       {toDoItems.map((toDoItem) => {
-        return <div key={toDoItem.key}>{toDoItem.content}</div>;
+        return <ToDoEntry key={toDoItem.key} content={toDoItem.content} />;
       })}
     </div>
   );
