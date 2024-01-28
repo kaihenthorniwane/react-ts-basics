@@ -18,7 +18,6 @@ export default function ToDoList({
             id={toDoItem.key}
             content={toDoItem.content}
             selected={toDoItem.selected}
-            initialInstance={toDoItem.initialInstance}
             handleMarkAsDone={handleMarkAsDone}
           />
         );

@@ -1,15 +1,12 @@
 export default function FloatingActionButton({
   handleAddToDo,
+  handleOverlayToggle,
 }: {
   handleAddToDo: () => void;
+  handleOverlayToggle: () => void;
 }) {
   return (
-    <div
-      className="fixed right-5 bottom-5"
-      onClick={() => {
-        handleAddToDo();
-      }}
-    >
+    <div className="fixed right-5 bottom-5" onClick={handleOverlayToggle}>
       <svg
         width="75"
         height="75"

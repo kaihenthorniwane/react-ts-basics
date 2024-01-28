@@ -6,15 +6,16 @@ import ToDoList from "@/components/Content/ToDoList";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import TestRive from "@/components/Content/Icons/TestRive";
+import NewToDoScreen from "@/components/Input/NewToDoScreen";
 
 export interface ToDoEntry {
   key: number;
   content: string;
-  initialInstance: boolean;
   selected: boolean;
 }
 
 export default function Home() {
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const [toDoEntries, setToDoEntries] = useState<Array<ToDoEntry>>([]);
   const [doneEntries, setDoneEntries] = useState<Array<ToDoEntry>>([]);
   const [renderOn, setRenderOn] = useState<boolean>(true);
@@ -54,11 +55,14 @@ export default function Home() {
     );
   };
 
+  function handleOverlayToggle() {
+    setShowOverlay((prevValue) => !prevValue);
+  }
+
   function handleAddToDo() {
     const newEntry: ToDoEntry = {
       key: keyIncrement.current,
       content: "One line content",
-      initialInstance: true,
       selected: false,
     };
     keyIncrement.current++;
@@ -76,10 +80,8 @@ export default function Home() {
     });
     if (typeof searchResult !== "undefined") {
       if (!searchResult.selected) {
-        const instanceSetting = searchResult.initialInstance ? false : true;
         const curEntry: ToDoEntry = {
           ...searchResult,
-          initialInstance: instanceSetting,
           selected: true,
         };
         setToDoEntries((prevEntries) =>
@@ -101,7 +103,11 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center p-5 pt-10 ">
-      <FloatingActionButton handleAddToDo={handleAddToDo} />
+      <FloatingActionButton
+        handleAddToDo={handleAddToDo}
+        handleOverlayToggle={handleOverlayToggle}
+      />
+      {showOverlay && <NewToDoScreen />}
       <RefreshButton />
       {renderOn && (
         <div className="flex flex-col w-full max-w-screen-sm items-stretch gap-14">
