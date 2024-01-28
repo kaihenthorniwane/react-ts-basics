@@ -107,7 +107,9 @@ export default function Home() {
         handleAddToDo={handleAddToDo}
         handleOverlayToggle={handleOverlayToggle}
       />
-      {showOverlay && <NewToDoScreen />}
+      {showOverlay && (
+        <NewToDoScreen handleOverlayToggle={handleOverlayToggle} />
+      )}
       <RefreshButton />
       {renderOn && (
         <div className="flex flex-col w-full max-w-screen-sm items-stretch gap-14">

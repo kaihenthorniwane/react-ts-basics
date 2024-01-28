@@ -2,7 +2,11 @@ import { type FormEvent, useRef, useEffect } from "react";
 import NewToDoArrow from "../Content/Icons/NewToDoArrow";
 import SaveButtonBack from "./SaveButtonBack";
 
-export default function NewToDoScreen() {
+export default function NewToDoScreen({
+  handleOverlayToggle,
+}: {
+  handleOverlayToggle: () => {};
+}) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const adjustHeight = () => {
@@ -26,10 +30,19 @@ export default function NewToDoScreen() {
   }
   function handleCancel(event: FormEvent) {
     event?.preventDefault();
+    handleOverlayToggle();
   }
   return (
-    <div className="flex justify-center fixed w-full h-full p-5 pt-32 bg-BrandBlack/75">
-      <div className="max-w-lg w-full flex flex-col">
+    <div
+      className="flex justify-center items-start fixed w-full h-full p-5  bg-BrandBlack/75"
+      onClick={handleOverlayToggle}
+    >
+      <div
+        className="max-w-lg w-full flex flex-col mt-32"
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      >
         <form className="flex flex-col gap-6">
           <label
             htmlFor="todo"
