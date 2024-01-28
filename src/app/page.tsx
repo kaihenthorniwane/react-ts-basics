@@ -108,7 +108,7 @@ export default function Home() {
         handleOverlayToggle={handleOverlayToggle}
       />
       {showOverlay && (
-        <NewToDoScreen handleOverlayToggle={() => handleOverlayToggle} />
+        <NewToDoScreen handleOverlayToggle={handleOverlayToggle} />
       )}
       <RefreshButton />
       {renderOn && (

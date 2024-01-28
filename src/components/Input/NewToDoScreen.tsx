@@ -5,7 +5,7 @@ import SaveButtonBack from "./SaveButtonBack";
 export default function NewToDoScreen({
   handleOverlayToggle,
 }: {
-  handleOverlayToggle: () => {};
+  handleOverlayToggle: () => void;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
