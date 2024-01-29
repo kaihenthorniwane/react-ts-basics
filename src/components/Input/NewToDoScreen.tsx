@@ -65,6 +65,7 @@ export default function NewToDoScreen({
           </label>
           <textarea
             ref={textareaRef}
+            autoFocus
             className="bg-BrandGrey text-2xl p-6 py-5 rounded-3xl"
             id="todo"
             onInput={() => {
