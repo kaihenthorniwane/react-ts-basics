@@ -60,7 +60,6 @@ export default function Home() {
   }
 
   function handleAddToDo(content: string) {
-    console.log("added");
     const newEntry: ToDoEntry = {
       key: keyIncrement.current,
       content: content,
@@ -103,7 +102,12 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center p-5 pt-10 ">
+    <main
+      className={
+        "flex flex-col items-center p-5 pt-10 h-screen " +
+        (showOverlay ? "overflow-hidden" : "overflow-auto")
+      }
+    >
       <FloatingActionButton handleOverlayToggle={handleOverlayToggle} />
       {showOverlay && (
         <NewToDoScreen

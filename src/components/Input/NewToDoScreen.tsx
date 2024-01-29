@@ -46,7 +46,7 @@ export default function NewToDoScreen({
   }
   return (
     <div
-      className="flex justify-center items-start fixed w-full h-full p-5  bg-BrandBlack/75"
+      className="flex justify-center items-start fixed top-0 w-full h-full p-5  bg-BrandBlack/75"
       onClick={handleOverlayToggle}
     >
       <div
@@ -83,15 +83,22 @@ export default function NewToDoScreen({
                       event?.preventDefault();
                     }
               }
-              className={
-                "w-full relative transition-opacity " +
-                (textContent.length == 0 ? "opacity-25" : "")
-              }
+              className="w-full relative"
             >
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-BrandBlack">
+              <div className="absolute z-[1] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-BrandBlack">
                 Save
               </div>
-              <SaveButtonBack />
+              <div
+                className={
+                  "transition-opacity " +
+                  (textContent.length == 0 ? "opacity-25" : "")
+                }
+              >
+                <SaveButtonBack color={"rgb(var(--Brand-White))"} />
+              </div>
+              <div className="absolute z-[-1] top-0 bottom-0 left-0 right-0">
+                <SaveButtonBack color={"rgb(var(--Brand-Black))"} />
+              </div>
             </button>
           </div>
         </form>
