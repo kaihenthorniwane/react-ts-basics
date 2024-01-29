@@ -4,7 +4,7 @@ export default function FloatingActionButton({
   handleOverlayToggle: () => void;
 }) {
   return (
-    <div className="fixed right-5 bottom-5" onClick={handleOverlayToggle}>
+    <div className="fixed z-[1] right-5 bottom-5" onClick={handleOverlayToggle}>
       <svg
         width="75"
         height="75"

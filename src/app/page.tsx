@@ -31,7 +31,7 @@ export default function Home() {
   const RefreshButton = () => {
     return (
       <div
-        className="absolute top-5 right-5"
+        className="absolute z-[1] top-5 right-5"
         onClick={() => {
           handleReRender();
         }}
@@ -102,7 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center p-5 pt-10 ">
+    <main className="flex flex-col items-center">
       <FloatingActionButton handleOverlayToggle={handleOverlayToggle} />
       {showOverlay && (
         <NewToDoScreen
@@ -112,7 +112,12 @@ export default function Home() {
       )}
       <RefreshButton />
       {renderOn && (
-        <div className="flex flex-col w-full max-w-screen-sm items-stretch gap-14">
+        <div
+          className={
+            " flex flex-col w-full max-w-screen-sm p-5 pt-10 items-stretch gap-14 transition-transform " +
+            (showOverlay ? "scale-90" : "")
+          }
+        >
           <motion.div className="flex flex-col gap-7" layout>
             <Header
               amount={toDoEntries.length}
