@@ -1,8 +1,6 @@
 export default function FloatingActionButton({
-  handleAddToDo,
   handleOverlayToggle,
 }: {
-  handleAddToDo: () => void;
   handleOverlayToggle: () => void;
 }) {
   return (

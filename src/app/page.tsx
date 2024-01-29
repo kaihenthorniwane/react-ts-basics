@@ -59,10 +59,11 @@ export default function Home() {
     setShowOverlay((prevValue) => !prevValue);
   }
 
-  function handleAddToDo() {
+  function handleAddToDo(content: string) {
+    console.log("added");
     const newEntry: ToDoEntry = {
       key: keyIncrement.current,
-      content: "One line content",
+      content: content,
       selected: false,
     };
     keyIncrement.current++;
@@ -103,12 +104,12 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center p-5 pt-10 ">
-      <FloatingActionButton
-        handleAddToDo={handleAddToDo}
-        handleOverlayToggle={handleOverlayToggle}
-      />
+      <FloatingActionButton handleOverlayToggle={handleOverlayToggle} />
       {showOverlay && (
-        <NewToDoScreen handleOverlayToggle={handleOverlayToggle} />
+        <NewToDoScreen
+          handleOverlayToggle={handleOverlayToggle}
+          handleAddToDo={handleAddToDo}
+        />
       )}
       <RefreshButton />
       {renderOn && (

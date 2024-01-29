@@ -1,13 +1,23 @@
-import { type FormEvent, useRef, useEffect } from "react";
+import { type FormEvent, useRef, useEffect, useState } from "react";
 import NewToDoArrow from "../Content/Icons/NewToDoArrow";
 import SaveButtonBack from "./SaveButtonBack";
 
 export default function NewToDoScreen({
   handleOverlayToggle,
+  handleAddToDo,
 }: {
   handleOverlayToggle: () => void;
+  handleAddToDo: (content: string) => void;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [textContent, setTextContent] = useState<string>("");
+
+  const updateSavedText = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      setTextContent(textarea.value);
+    }
+  };
 
   const adjustHeight = () => {
     const textarea = textareaRef.current;
@@ -27,6 +37,8 @@ export default function NewToDoScreen({
 
   function handleSubmit(event: FormEvent) {
     event?.preventDefault();
+    handleAddToDo(textContent);
+    handleOverlayToggle();
   }
   function handleCancel(event: FormEvent) {
     event?.preventDefault();
@@ -53,13 +65,28 @@ export default function NewToDoScreen({
           </label>
           <textarea
             ref={textareaRef}
-            className="bg-BrandGrey text-2xl p-6 pt-4 pb-5 rounded-3xl"
+            className="bg-BrandGrey text-2xl p-6 py-5 rounded-3xl"
             id="todo"
-            onInput={adjustHeight}
+            onInput={() => {
+              adjustHeight();
+              updateSavedText();
+            }}
           ></textarea>
           <div className="flex gap-5 font-header">
             <button onClick={handleCancel}>Cancel</button>
-            <button onClick={handleSubmit} className="w-full relative">
+            <button
+              onClick={
+                textContent.length > 0
+                  ? handleSubmit
+                  : (event) => {
+                      event?.preventDefault();
+                    }
+              }
+              className={
+                "w-full relative transition-opacity " +
+                (textContent.length == 0 ? "opacity-25" : "")
+              }
+            >
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-BrandBlack">
                 Save
               </div>

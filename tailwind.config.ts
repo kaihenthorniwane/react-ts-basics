@@ -17,6 +17,9 @@ const config: Config = {
         header: "brother-1816, sans-serif;",
         body: "tenon, sans-serif",
       },
+      transitionProperty: {
+        height: "height",
+      },
     },
   },
   plugins: [],

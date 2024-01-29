@@ -61,7 +61,7 @@ export default function ToDoEntry({
         >
           <Checkbox selected={selected} />
         </div>
-        <div className={isSingleLine ? "mt-[0.2rem]" : "mt-[-0.2rem]"}>
+        <div className={isSingleLine ? "mt-[0.1rem]" : "mt-[-0.2rem]"}>
           <div ref={contentRef}>{content}</div>
         </div>
       </motion.div>
