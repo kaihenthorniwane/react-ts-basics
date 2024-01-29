@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { type FormEvent, useRef, useEffect, useState } from "react";
 import NewToDoArrow from "../Content/Icons/NewToDoArrow";
 import SaveButtonBack from "./SaveButtonBack";
@@ -49,8 +50,10 @@ export default function NewToDoScreen({
       className="flex justify-center items-start fixed top-0 w-full h-full p-5 z-[2] bg-BrandBlack/85"
       onClick={handleOverlayToggle}
     >
-      <div
+      <motion.div
         className="max-w-lg w-full flex flex-col mt-32"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
         onClick={(event) => {
           event.stopPropagation();
         }}
@@ -102,7 +105,7 @@ export default function NewToDoScreen({
             </button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
