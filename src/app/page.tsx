@@ -102,12 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main
-      className={
-        "flex flex-col items-center p-5 pt-10 h-screen " +
-        (showOverlay ? "overflow-hidden" : "overflow-auto")
-      }
-    >
+    <main className="flex flex-col items-center p-5 pt-10 ">
       <FloatingActionButton handleOverlayToggle={handleOverlayToggle} />
       {showOverlay && (
         <NewToDoScreen
