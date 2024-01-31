@@ -47,7 +47,7 @@ export default function NewToDoScreen({
   }
   return (
     <div
-      className="flex justify-center items-start fixed top-0 w-full p-5 z-[2] bg-BrandBlack/85"
+      className="flex justify-center items-start fixed top-0 w-full h-full p-5 z-[2] bg-BrandBlack/85"
       onClick={handleOverlayToggle}
     >
       <motion.div

@@ -3,10 +3,10 @@
 import FloatingActionButton from "@/components/Button/FloatingActionButton";
 import Header from "@/components/Content/Header";
 import ToDoList from "@/components/Content/ToDoList";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import TestRive from "@/components/Content/Icons/TestRive";
 import NewToDoScreen from "@/components/Input/NewToDoScreen";
+import InfoBox, { InfoBoxLiteral } from "@/components/Content/InfoBox";
 
 export interface ToDoEntry {
   key: number;
@@ -19,6 +19,7 @@ export default function Home() {
   const [toDoEntries, setToDoEntries] = useState<Array<ToDoEntry>>([]);
   const [doneEntries, setDoneEntries] = useState<Array<ToDoEntry>>([]);
   const [renderOn, setRenderOn] = useState<boolean>(true);
+  const [infoBoxState, setInfoBoxState] = useState<InfoBoxLiteral>("empty");
   const keyIncrement = useRef(1);
 
   function handleReRender() {
@@ -27,6 +28,19 @@ export default function Home() {
       setRenderOn(true);
     }, 100);
   }
+
+  useEffect(() => {
+    setInfoBoxState(() => {
+      const amountOfEntries = toDoEntries.length;
+      if (amountOfEntries == 0) {
+        return "empty";
+      } else if (amountOfEntries > 8) {
+        return "too much";
+      } else {
+        return "do not show";
+      }
+    });
+  }, [toDoEntries]);
 
   const RefreshButton = () => {
     return (
@@ -128,6 +142,9 @@ export default function Home() {
               toDoItems={toDoEntries}
               handleMarkAsDone={handleMarkAsDone}
             />
+            {infoBoxState !== "do not show" && (
+              <InfoBox variant={infoBoxState} />
+            )}
           </motion.div>
           <AnimatePresence>
             {doneEntries.length > 0 && (
