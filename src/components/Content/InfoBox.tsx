@@ -17,7 +17,7 @@ export default function InfoBox({ variant }: InfoBoxProps) {
       </>
     ),
     "too much": <div className="border-2 rounded-2xl p-5">way too much</div>,
-    "do not show": <>"Do not show"</>,
+    "do not show": <>Do not show</>,
   };
 
   return variantContent[variant];
