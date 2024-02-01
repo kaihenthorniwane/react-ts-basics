@@ -16,7 +16,11 @@ export default function InfoBox({ variant }: InfoBoxProps) {
         <SmallRiveHouse />
       </>
     ),
-    "too much": <div className="border-2 rounded-2xl p-5">way too much</div>,
+    "too much": (
+      <div className="border-2 rounded-2xl p-5">
+        You're collecting a lot of goals. Don't put too much on your plate!
+      </div>
+    ),
     "do not show": <>Do not show</>,
   };
 
