@@ -6,7 +6,10 @@ import ToDoList from "@/components/Content/ToDoList";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import NewToDoScreen from "@/components/Input/NewToDoScreen";
-import InfoBox, { InfoBoxLiteral } from "@/components/Content/InfoBox";
+import InfoBox, {
+  InfoBoxLiteral,
+  InfoBoxSeverity,
+} from "@/components/Content/InfoBox";
 
 export interface ToDoEntry {
   key: number;
@@ -20,6 +23,7 @@ export default function Home() {
   const [doneEntries, setDoneEntries] = useState<Array<ToDoEntry>>([]);
   const [renderOn, setRenderOn] = useState<boolean>(true);
   const [infoBoxState, setInfoBoxState] = useState<InfoBoxLiteral>("empty");
+  const [severity, setSeverity] = useState<InfoBoxSeverity>("low");
   const keyIncrement = useRef(1);
 
   function handleReRender() {
@@ -38,6 +42,16 @@ export default function Home() {
         return "too much";
       } else {
         return "do not show";
+      }
+    });
+    setSeverity(() => {
+      const amountOfEntries = toDoEntries.length;
+      if (amountOfEntries <= 10) {
+        return "low";
+      } else if (amountOfEntries <= 12) {
+        return "medium";
+      } else {
+        return "high";
       }
     });
   }, [toDoEntries]);
@@ -138,13 +152,15 @@ export default function Home() {
               topText={"You've got"}
               disableIntro={true}
             />
+
+            {infoBoxState === "too much" && (
+              <InfoBox variant={infoBoxState} severity={severity} />
+            )}
             <ToDoList
               toDoItems={toDoEntries}
               handleMarkAsDone={handleMarkAsDone}
             />
-            {infoBoxState !== "do not show" && (
-              <InfoBox variant={infoBoxState} />
-            )}
+            {infoBoxState === "empty" && <InfoBox variant={infoBoxState} />}
           </motion.div>
           <AnimatePresence>
             {doneEntries.length > 0 && (
